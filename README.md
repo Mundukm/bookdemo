@@ -1,4 +1,11 @@
 #Book demo application
 
 ###to run application locally :
-        mvn tomcat7:run
+     h2 base :
+        
+       mvn -Dspring.profiles.active="h2" tomcat7:run
+        
+     mysql base :
+        
+       mvn -Dspring.profiles.active="mysql" tomcat7:run
+  

@@ -43,6 +43,8 @@ public class PersistenceConfig {
      */
     @Autowired
     private Environment env;
+    @Autowired
+    private DataSource dataSource;
 
     /**
      * Packages spring to scan with session factory.
@@ -68,21 +70,8 @@ public class PersistenceConfig {
         return props;
     }
 
-    /**
-     * Spring bean of database setting.
-     * All properties are from config/jdbc.properties
-     *
-     * @return new configured data source
-     */
-    @Bean
-    public DataSource dataSource() {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-        ds.setUrl(env.getProperty("jdbc.url"));
-        ds.setUsername(env.getProperty("jdbc.username"));
-        ds.setPassword(env.getProperty("jdbc.password"));
-        return ds;
-    }
+
+
 
     /**
      * Spring bean for session factory.
@@ -115,7 +104,7 @@ public class PersistenceConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("bookdemo");
-        factory.setDataSource(dataSource());
+        factory.setDataSource(dataSource);
         factory.afterPropertiesSet();
         return factory.getObject();
     }
