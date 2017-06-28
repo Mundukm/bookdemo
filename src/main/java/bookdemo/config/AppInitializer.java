@@ -8,17 +8,21 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+/**
+ * Main class where web application initializes.
+ * To change default datasource set
+ * ctx.getEnvironment().setDefaultProfiles("h2"); to
+ * selected database
+ */
 public class AppInitializer implements WebApplicationInitializer {
 
+	//available profiles [h2, mysql]
 	public void onStartup(ServletContext container) throws ServletException {
-
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-//		ctx.getEnvironment().setActiveProfiles("dev");
+		ctx.getEnvironment().setDefaultProfiles("mysql");
 		ctx.register(AppConfig.class);
 		ctx.setServletContext(container);
-
 		ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
-
 		servlet.setLoadOnStartup(1);
 		servlet.addMapping("/");
 	}

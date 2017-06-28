@@ -1,6 +1,5 @@
 package bookdemo.config;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -23,6 +22,7 @@ import java.util.Properties;
  * Annotation EnableTransactionManagement to use transactions
  * Annotation EnableJpaRepositories to use JPA repository
  * Annotation PropertySources to define additional properties
+ *
  * @author Myndyk Mykola
  * @version 1.0
  * @since 24.06.2017
@@ -35,7 +35,7 @@ import java.util.Properties;
         @PropertySource("config/hibernate.properties")})
 @ComponentScan(
         basePackages = {"bookdemo"}, excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class) })
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class)})
 public class PersistenceConfig {
 
     /**
@@ -43,6 +43,10 @@ public class PersistenceConfig {
      */
     @Autowired
     private Environment env;
+
+    /**
+     * Datasource that generates depend on profile.
+     */
     @Autowired
     private DataSource dataSource;
 
@@ -50,11 +54,6 @@ public class PersistenceConfig {
      * Packages spring to scan with session factory.
      */
     private String[] packages = {"bookdemo"};
-
-    @Bean(initMethod="start",destroyMethod="stop")
-    public org.h2.tools.Server h2WebConsonleServer () throws SQLException {
-        return org.h2.tools.Server.createWebServer("-web","-webAllowOthers","-webDaemon","-webPort", "8082");
-    }
 
     /**
      * Method that initialize all properties for hibernate from environment.
@@ -69,9 +68,6 @@ public class PersistenceConfig {
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         return props;
     }
-
-
-
 
     /**
      * Spring bean for session factory.

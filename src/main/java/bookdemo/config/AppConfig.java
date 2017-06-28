@@ -10,23 +10,36 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+/**
+ * MVC configuration.
+ */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "bookdemo")
+@ComponentScan(basePackages = {"bookdemo"})
 public class AppConfig extends WebMvcConfigurerAdapter {
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setViewClass(JstlView.class);
-		viewResolver.setPrefix("/WEB-INF/views/");
-		viewResolver.setSuffix(".jsp");
 
-		return viewResolver;
-	}
+    /**
+     * Spring bean view files path.
+     *
+     * @return new instance of view resolver
+     */
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
 
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
+        return viewResolver;
+    }
 
+    /**
+     * Method to define default servlet handling.
+     *
+     * @param configurer configurer
+     */
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }

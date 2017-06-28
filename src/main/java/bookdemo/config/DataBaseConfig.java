@@ -4,12 +4,11 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
 /**
- * Created by Kolja on 28.06.2017.
+ * Configuration to set up database according to profile.
  */
 @Configuration
 @PropertySources({
@@ -17,16 +16,18 @@ import javax.sql.DataSource;
         @PropertySource("config/hibernate.properties")})
 public class DataBaseConfig {
 
+    /**
+     * Spring environment to get properties.
+     */
     @Autowired
     private Environment env;
 
     /**
-     * Spring bean of database setting.
+     * Spring bean of database setting for mysql profile.
      * All properties are from config/jdbc.properties
      *
      * @return new configured data source
      */
-
     @Bean(name = "dataSource")
     @Profile("mysql")
     public DataSource dataSourceMySQL() {
@@ -38,6 +39,12 @@ public class DataBaseConfig {
         return ds;
     }
 
+    /**
+     * Spring bean of database setting for H2 profile.
+     * All properties are from config/jdbc.properties
+     *
+     * @return new configured data source
+     */
     @Bean(name = "dataSource")
     @Profile("h2")
     public DataSource dataSourceH2() {
@@ -48,5 +55,4 @@ public class DataBaseConfig {
         ds.setPassword(env.getProperty("jdbc.passwordH2"));
         return ds;
     }
-
 }
