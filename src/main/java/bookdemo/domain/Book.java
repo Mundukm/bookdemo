@@ -97,34 +97,4 @@ public class Book {
         return "Book{" + "name='" + name + '\'' + ", genre=" + genre + '}';
     }
 
-    /**
-     * Overridden method to check if instances of this class are equal.
-     *
-     * @param o object to compare
-     * @return true if equals, false if not
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Book)) return false;
-
-        Book book = (Book) o;
-
-        if (getId() != book.getId()) return false;
-        if (getName() != null ? !getName().equals(book.getName()) : book.getName() != null) return false;
-        return getGenre() != null ? getGenre().equals(book.getGenre()) : book.getGenre() == null;
-    }
-
-    /**
-     * Overridden method to generate hashcode.
-     *
-     * @return hashcode of current instance
-     */
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + (getGenre() != null ? getGenre().hashCode() : 0);
-        return result;
-    }
 }

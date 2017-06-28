@@ -71,33 +71,4 @@ public class Genre {
     public String toString() {
         return "Genre{" + "name='" + name + '\'' + '}';
     }
-
-    /**
-     * Overridden method to check if instances of this class are equal.
-     *
-     * @param o object to compare
-     * @return true if equals, false if not
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Genre)) return false;
-
-        Genre genre = (Genre) o;
-
-        if (getId() != genre.getId()) return false;
-        return getName() != null ? getName().equals(genre.getName()) : genre.getName() == null;
-    }
-
-    /**
-     * Overridden method to generate hashcode.
-     *
-     * @return hashcode of current instance
-     */
-    @Override
-    public int hashCode() {
-        int result = getId();
-        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        return result;
-    }
 }

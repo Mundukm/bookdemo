@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -47,6 +48,11 @@ public class PersistenceConfig {
      * Packages spring to scan with session factory.
      */
     private String[] packages = {"bookdemo"};
+
+    @Bean(initMethod="start",destroyMethod="stop")
+    public org.h2.tools.Server h2WebConsonleServer () throws SQLException {
+        return org.h2.tools.Server.createWebServer("-web","-webAllowOthers","-webDaemon","-webPort", "8082");
+    }
 
     /**
      * Method that initialize all properties for hibernate from environment.
