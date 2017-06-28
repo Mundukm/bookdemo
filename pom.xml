@@ -1,21 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>net.viralpatel.spring</groupId>
-	<artifactId>HelloWorld</artifactId>
+	<groupId>MyndykM</groupId>
+	<artifactId>BookDemo</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HelloWorld Maven Webapp</name>
+	<name>Book Demo</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<java-version>1.7</java-version>
-		<org.springframework-version>4.3.0.RELEASE</org.springframework-version>
+		<connectorJ>5.1.38</connectorJ>
+		<spring.version>4.3.0.RELEASE</spring.version>
+		<hibernate.version>4.3.9.Final</hibernate.version>
+		<hibernate.validator.version>5.2.4.Final</hibernate.validator.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -28,9 +31,81 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- JDBC dependencies -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${connectorJ}</version>
+		</dependency>
+
+		<!-- database pool -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-dbcp</artifactId>
+			<version>7.0.55</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<!-- spring data JPA dependencies-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.11.1.RELEASE</version>
+		</dependency>
+
+		<!-- Hibernate dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+
+
 	</dependencies>
 	<build>
-		<finalName>HelloWorld</finalName>
+		<finalName>BookDemo</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -38,7 +113,7 @@
 					<artifactId>tomcat7-maven-plugin</artifactId>
 					<version>2.2</version>
 					<configuration>
-						<path>/spring4</path>
+						<path>/</path>
 					</configuration>
 				</plugin>			
 				<plugin>
@@ -56,7 +131,7 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>helloworld</warName>
+						<warName>bookdemo</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>

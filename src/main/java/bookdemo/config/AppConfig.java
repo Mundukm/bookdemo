@@ -1,4 +1,4 @@
-package net.viralpatel.spring.config;
+package bookdemo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "net.viralpatel.spring")
+@ComponentScan(basePackages = "bookdemo")
 public class AppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
